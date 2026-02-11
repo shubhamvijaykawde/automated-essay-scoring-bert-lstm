@@ -1,0 +1,26 @@
+# Core
+numpy
+pandas
+scikit-learn
+tqdm
+
+# NLP
+nltk
+gensim
+stop-words
+language-tool-python
+pyspellchecker
+
+# Deep Learning - LSTM
+tensorflow>=2.10
+keras
+
+# Deep Learning - BERT
+torch
+transformers
+
+# Web App
+flask
+
+# Utilities
+h5py

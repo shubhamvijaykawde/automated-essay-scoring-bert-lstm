@@ -1,0 +1,28 @@
+# datasets
+data/*
+!data/.gitkeep
+
+# trained models
+models/*
+!models/.gitkeep
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+
+# notebooks
+.ipynb_checkpoints/
+
+# environments
+venv/
+.env
+
+# torch / keras weights
+*.pt
+*.bin
+*.h5
+
+# OS files
+.DS_Store
+Thumbs.db
