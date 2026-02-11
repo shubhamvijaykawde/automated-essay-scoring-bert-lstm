@@ -1,48 +1,129 @@
-#Parameter-Based Automated Essay Grading using LSTM and BERT
+# Automated Essay Scoring using LSTM & BERT
 
-This project implements an Automated Essay Grading (AEG) system using two complementary deep learning approaches:
+A deep learning–based Automated Essay Scoring (AES) system that evaluates essays either holistically or across multiple linguistic parameters such as grammar, vocabulary, organization, and supporting ideas.
 
-1. LSTM + Word2Vec for holistic score prediction (ASAP dataset)
-2. BERT-based multi-output regression for parameter-wise essay evaluation (CELA dataset)
-
-The system predicts essay quality either as a single holistic score or as multiple fine-grained linguistic parameters such as grammar, lexical quality, organization, and coherence.
+The project combines sequential modeling (LSTM) and transformer-based contextual understanding (BERT) and provides real-time evaluation through a web application.
 
 ---
 
-##Project Motivation
+## Features
 
-Traditional automated essay grading systems focus primarily on holistic scores, offering limited interpretability.  
-This project extends standard approaches by:
-
-- Combining sequential modeling (LSTM) with contextual embeddings (BERT)
-- Supporting parameter-level scoring
-- Providing a web-based interface for real-time essay evaluation
-
----
-
-##Models Overview
-
-### 1) LSTM-based Holistic Scoring
-- Dataset: ASAP (Automated Student Assessment Prize)
-- Embeddings: Word2Vec (300-dimensional)
-- Architecture:
-  - LSTM (300 units) ? LSTM (64 units) ? Dense(1)
-- Evaluation Metrics:
-  - RMSE
-  - Quadratic Weighted Kappa (QWK)
-
-### 2) BERT-based Parameter Scoring
-- Dataset: CELA
-- Model: `bert-base-uncased`
-- Task: Multi-output regression
-- Outputs:
-  - Grammar
-  - Lexical Quality
-  - Global Organization
-  - Local Organization
-  - Supporting Ideas
-  - Holistic Score
-- Loss Function: Mean Squared Error (MSE)
+* Multi-parameter essay grading (Grammar, Lexical Quality, Organization, Supporting Ideas, Holistic Score)
+* Holistic scoring using LSTM
+* Parameter-level scoring using BERT multi-output regression
+* Score capping to prevent unrealistic predictions
+* Human-readable feedback generation for each score band
+* Interactive Flask web interface for real-time evaluation
 
 ---
 
+## Models
+
+### BERT — Parameter Based Scoring
+
+Dataset: CELA
+Architecture: bert-base-uncased + regression head
+Outputs:
+
+* Grammar
+* Lexical
+* Global Organization
+* Local Organization
+* Supporting Ideas
+* Holistic
+
+### LSTM — Holistic Scoring
+
+Dataset: ASAP
+Embedding: Word2Vec
+Evaluation Metrics:
+
+* RMSE
+* Quadratic Weighted Kappa (QWK)
+
+---
+
+## Project Structure
+
+```
+bert_models/        → BERT architecture & dataset loader
+src/                → preprocessing & LSTM model
+templates/          → web interface
+notebooks/          → training notebooks
+results/            → prediction outputs
+data/               → datasets (not included)
+models/             → trained weights (not included)
+app.py              → Flask application
+```
+
+---
+
+## Setup Instructions
+
+### 1. Clone Repository
+
+```
+git clone https://github.com/shubhamvijaykawde/automated-essay-scoring-bert-lstm.git
+cd automated-essay-scoring-bert-lstm
+```
+
+### 2. Install Dependencies
+
+```
+pip install -r requirements.txt
+```
+
+### 3. Download Datasets
+
+Follow instructions in:
+
+```
+DATASET.md
+```
+
+### 4. Run Web App
+
+```
+python app.py
+```
+
+Open browser:
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+## Demo Workflow
+
+1. Paste an essay into the text box
+2. Click Evaluate
+3. System predicts parameter-wise scores
+4. Feedback is generated automatically
+
+---
+
+## Technical Highlights
+
+* Multi-output regression using BERT
+* Sequence modeling with LSTM
+* Custom feedback engine mapped to scoring rubric
+* Score normalization and capping to prevent inflated grading
+* End-to-end ML deployment with Flask
+
+---
+
+## Future Improvements
+
+* Attention visualization for interpretability
+* Grammar error localization
+* Rubric-aligned training with ranking loss
+* GPU optimized inference
+
+---
+
+## Author
+
+Shubham Vijay Kawde
+MSc Data Science — Trier University
